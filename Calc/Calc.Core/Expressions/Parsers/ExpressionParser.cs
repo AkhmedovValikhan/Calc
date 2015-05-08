@@ -56,10 +56,18 @@ namespace Calc.Core.Expressions.Parsers
 
             }
 
+            
             while (highestPriority > 0)
             {
                 var k = 0;
-                
+
+                if (operationList.Count(expr => expr.Priority == highestPriority) == 0)
+                {
+                    k++;
+                    highestPriority--;
+                    continue;
+                }
+               
                 while (k < operationList.Count)
                 {
                     if (operationList[k].Priority == highestPriority)
