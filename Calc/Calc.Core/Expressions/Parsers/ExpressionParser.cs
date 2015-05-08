@@ -17,7 +17,7 @@ namespace Calc.Core.Expressions.Parsers
             var highestPriority = 2; //will be fix
             var operandList = new List<IExpression>();
             var operationList = new List<IBinaryExpression>();
-
+            var nesting = 0;
             if (!AnalyzeBrackets(expression))
                 throw new Exception("Нарушен баланс скобок");
             var i = 0;
@@ -32,18 +32,24 @@ namespace Calc.Core.Expressions.Parsers
                 if (BinaryExpressionParser.ContainsOperation(expression[i]))
                 {
                     var operCh = expression[i];
-                    operationList.Add(BinaryExpressionParser.Parse(operCh));
+                    var operation = BinaryExpressionParser.Parse(operCh);
+                    operation.Priority += nesting;
+                    operationList.Add(operation);
                     i++;
                     continue;
                 }
+                //Увлеичиваем уровень вложенность(nesting), тем самым увеличивая приоритет вложенных выражений
                 if (expression[i] == '(')
                 {
-                    throw new NotImplementedException();
+                    nesting += highestPriority;
+                    highestPriority += nesting;
+                    i++;
                     continue;
                 }
                 if (expression[i] == ')')
                 {
-                    throw new NotImplementedException();
+                    nesting = highestPriority - nesting;
+                    i++;
                     continue;
                 }
                 throw new Exception("Неопознаный оператор: " + expression[i]);
@@ -53,6 +59,7 @@ namespace Calc.Core.Expressions.Parsers
             while (highestPriority > 0)
             {
                 var k = 0;
+                
                 while (k < operationList.Count)
                 {
                     if (operationList[k].Priority == highestPriority)
