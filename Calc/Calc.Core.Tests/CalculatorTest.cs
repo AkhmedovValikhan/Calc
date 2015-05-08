@@ -42,5 +42,14 @@ namespace Calc.Core.Tests
             var result = calc.Calculate(expression, new ExpressionParser());
             Assert.AreEqual(12, result);
         }
+
+        [TestMethod]
+        public void ComplexTest()
+        {
+            var calc = new Calculator();
+            var expression = "20 + (10 * (10-5))";
+            var result = calc.Calculate(expression, new ExpressionParser());
+            Assert.AreEqual(70, result);
+        }
     }
 }
