@@ -2,7 +2,6 @@ namespace Calc.Core.Expressions.BinaryExpressions
 {
     public class AdditionBinaryExpression : BinaryExpressionBase
     {
-        public static short Precence = 1;
 
         public AdditionBinaryExpression(IExpression left, IExpression right)
             : base(left, right)

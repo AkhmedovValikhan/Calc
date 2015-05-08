@@ -2,7 +2,6 @@ namespace Calc.Core.Expressions.BinaryExpressions
 {
     public class MultiplicationBinaryExpression : BinaryExpressionBase
     {
-        public static short Precence = 2;
         public MultiplicationBinaryExpression(IExpression left, IExpression right)
             : base(left, right)
         {
