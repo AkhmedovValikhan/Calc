@@ -46,7 +46,7 @@ namespace Calc.Core.Expressions.Parsers
                     throw new NotImplementedException();
                     continue;
                 }
-                throw new Exception("Неопознаный оператор" + expression[i]);
+                throw new Exception("Неопознаный оператор: " + expression[i]);
 
             }
 
