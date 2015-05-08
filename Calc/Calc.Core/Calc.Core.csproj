@@ -39,8 +39,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculator.cs" />
+    <Compile Include="Expressions\Parsers\BinaryExpressionParser.cs" />
+    <Compile Include="Expressions\BinaryExpressions\BinaryExpressionBase.cs" />
+    <Compile Include="Expressions\BinaryExpressions\AdditionBinaryExpression.cs" />
+    <Compile Include="Expressions\BinaryExpressions\DivisionBinaryExpression.cs" />
+    <Compile Include="Expressions\Parsers\ExpressionParser.cs" />
+    <Compile Include="Expressions\IExpression.cs" />
+    <Compile Include="Expressions\BinaryExpressions\IBinaryExpression.cs" />
+    <Compile Include="Expressions\BinaryExpressions\SubtractionBinaryExpression.cs" />
+    <Compile Include="Expressions\BinaryExpressions\MultiplicationBinaryExpression.cs" />
+    <Compile Include="Expressions\NumberExpression.cs" />
+    <Compile Include="Expressions\Parsers\IExpressionParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
