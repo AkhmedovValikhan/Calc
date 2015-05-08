@@ -4,7 +4,7 @@ using Calc.Core.Expressions.BinaryExpressions;
 
 namespace Calc.Core.Expressions.Parsers
 {
-    public class BinaryExpressionParser
+    public static class BinaryExpressionParser
     {
         public static IDictionary<char, Type> OperatorsDictionary
         {
@@ -19,7 +19,12 @@ namespace Calc.Core.Expressions.Parsers
                 };
             }
         }
-        public IBinaryExpression Parse(char operationCh, IExpression left, IExpression right)
+
+        public static bool ContainsOperation(char ch)
+        {
+            return OperatorsDictionary.ContainsKey(ch);
+        }
+        public static IBinaryExpression Parse(char operationCh, IExpression left, IExpression right)
         {
             Type typeOfExpression;
             if (!OperatorsDictionary.TryGetValue(operationCh, out typeOfExpression))

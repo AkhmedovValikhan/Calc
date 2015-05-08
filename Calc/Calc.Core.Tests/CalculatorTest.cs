@@ -1,4 +1,5 @@
 ﻿using System;
+using Calc.Core.Expressions.Parsers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Calc.Core.Tests
@@ -11,7 +12,7 @@ namespace Calc.Core.Tests
         {
             var calc = new Calculator();
             var expression = "1+2+3";
-            var result = calc.Calculate(expression);
+            var result = calc.Calculate(expression, new ExpressionParser());
             Assert.AreEqual(6.0, result);
         }
     }
