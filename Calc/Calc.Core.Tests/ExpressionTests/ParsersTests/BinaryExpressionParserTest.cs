@@ -16,12 +16,25 @@ namespace Calc.Core.Tests.ExpressionTests.ParsersTests
             var additionInstance = BinaryExpressionParser.Parse('+');
             additionInstance.LeftOperand = operand;
             additionInstance.RightOperand = operand;
-            //var subtractionInstance = BinaryExpressionParser.Parse('-', new NumberExpression("2"), new NumberExpression("2"));
-            //var divisionInstance = BinaryExpressionParser.Parse('/', new NumberExpression("2"), new NumberExpression("2"));
+
+            var subtractionInstance = BinaryExpressionParser.Parse('-');
+            subtractionInstance.LeftOperand = operand;
+            subtractionInstance.RightOperand = operand;
+
+            var divisionInstance = BinaryExpressionParser.Parse('/');
+            divisionInstance.LeftOperand = operand;
+            divisionInstance.RightOperand = operand;
+
+            var multiplicationInstance = BinaryExpressionParser.Parse('*');
+            multiplicationInstance.LeftOperand = operand;
+            multiplicationInstance.RightOperand = operand;
+
             Assert.AreEqual(typeof(AdditionBinaryExpression), additionInstance.GetType(), "Не возвращает инстанс AdditionBinaryExpression");
-            //Assert.AreEqual(typeof(SubtractionBinaryExpression), subtractionInstance.GetType(), "Не возвращает инстанс SubtractionBinaryExpression");
-            //Assert.AreEqual(typeof(DivisionBinaryExpression), divisionInstance.GetType(), "Не возвращает инстанс DivisionBinaryExpression");
+            Assert.AreEqual(typeof(SubtractionBinaryExpression), subtractionInstance.GetType(), "Не возвращает инстанс SubtractionBinaryExpression");
+            Assert.AreEqual(typeof(DivisionBinaryExpression), divisionInstance.GetType(), "Не возвращает инстанс DivisionBinaryExpression");
+            Assert.AreEqual(typeof(MultiplicationBinaryExpression), multiplicationInstance.GetType(), "Не возвращает инстанс MultiplicationBinaryExpression");
         }
+
         [TestMethod]
         public void ContainsOperatorTest()
         {
