@@ -38,9 +38,9 @@ namespace Calc.Core.Tests
         public void SimpleMultiplicationTest()
         {
             var calc = new Calculator();
-            var expression = "4 + 6*3";
+            var expression = "4 + 6*3/1 + 10";
             var result = calc.Calculate(expression, new ExpressionParser());
-            Assert.AreEqual(22, result);
+            Assert.AreEqual(32, result);
         }
     }
 }

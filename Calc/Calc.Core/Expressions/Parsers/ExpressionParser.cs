@@ -47,28 +47,29 @@ namespace Calc.Core.Expressions.Parsers
 
             }
 
-            for (var j =0;j < operationList.Count;  j++)
+            for (var k =0;k < operationList.Count;  k++)
             {
-                var op = operationList[j];
+                var op = operationList[k];
                 if (op == '*')
                 {
-                    var expr = BinaryExpressionParser.Parse(op, operandList[j], operandList[j + 1]);
-                    operationList.RemoveAt(j);
-                    operandList[j] = expr;
-                    operandList.RemoveAt(j+1);
+                    var expr = BinaryExpressionParser.Parse(op, operandList[k], operandList[k + 1]);
+                    operationList.RemoveAt(k);
+                    operandList[k] = expr;
+                    operandList.RemoveAt(k+1);
                     
                 }
 
                 if (op == '/')
                 {
-                    var expr = BinaryExpressionParser.Parse(op, operandList[j], operandList[j + 1]);
-                    operationList.RemoveAt(j);
-                    operandList[j] = expr;
-                    operandList.RemoveAt(j + 1);
+                    var expr = BinaryExpressionParser.Parse(op, operandList[k], operandList[k + 1]);
+                    operationList.RemoveAt(k);
+                    operandList[k] = expr;
+                    operandList.RemoveAt(k + 1);
 
                 }
             }
-            for (var j = 0; j < operationList.Count; j++)
+            var j = 0;
+            while (operandList.Count != 1)
             {
                 var op = operationList[j];
                 var expr = BinaryExpressionParser.Parse(op, operandList[j], operandList[j + 1]);
