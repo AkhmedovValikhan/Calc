@@ -6,7 +6,7 @@ namespace Calc.Core.Expressions.BinaryExpressions
         public IExpression LeftOperand { get; set; }
 
         public IExpression RightOperand { get; set; }
-
+        public int Priority { get; set; }
         protected BinaryExpressionBase(IExpression left, IExpression right)
         {
             LeftOperand = left;
@@ -19,6 +19,5 @@ namespace Calc.Core.Expressions.BinaryExpressions
         }
 
         public abstract double Evaluate();
-        public abstract int Priority { get; set; }
     }
 }

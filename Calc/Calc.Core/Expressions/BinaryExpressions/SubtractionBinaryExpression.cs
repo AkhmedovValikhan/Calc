@@ -18,6 +18,5 @@ namespace Calc.Core.Expressions.BinaryExpressions
             return LeftOperand.Evaluate() - RightOperand.Evaluate();
         }
 
-        public override int Priority { get; set; }
     }
 }
