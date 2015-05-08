@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using Calc.Core.Expressions.BinaryExpressions;
 
@@ -11,33 +12,25 @@ namespace Calc.Core.Expressions.Parsers
     {
         public double ParseAndEvaluate(string expression)
         {
-            expression = expression.Trim();
-            var operationStack = new Stack<IBinaryExpression>();
+            expression = expression.Replace(" ", "");
+            var operandList = new List<IExpression>();
+            var operationList = new List<Char>();
             var resultsQueue = new Queue<IExpression>();
             if (!AnalyzeBrackets(expression))
                 throw new Exception("Нарушен баланс скобок");
             var i = 0;
+
             while (i < expression.Length)
             {
                 if (Char.IsDigit(expression[i]))
                 {
-                    resultsQueue.Enqueue(ParseNumber(expression, ref i));
+                    operandList.Add(ParseNumber(expression, ref i));
                     continue;
                 }
                 if (BinaryExpressionParser.ContainsOperation(expression[i]))
                 {
-                    var operCh = expression[i];
-                    if (Char.IsDigit(expression[i + 1]))
-                    {
-                        i += 1;
-                        resultsQueue.Enqueue(ParseNumber(expression, ref i));
-                    }
-                    else 
-                        throw new NotImplementedException();
-
-                    var result = BinaryExpressionParser.Parse(operCh, resultsQueue.Dequeue(),
-                        resultsQueue.Dequeue());
-                    resultsQueue.Enqueue(result);
+                    var operCh = expression[i++];
+                    operationList.Add(operCh);
                     continue;
                 }
                 if (expression[i] == '(')
@@ -53,7 +46,39 @@ namespace Calc.Core.Expressions.Parsers
                 throw new Exception("Неопознаный оператор" + expression[i]);
 
             }
-            var totalResult = resultsQueue.Dequeue().Evaluate();
+
+            for (var j =0;j < operationList.Count;  j++)
+            {
+                var op = operationList[j];
+                if (op == '*')
+                {
+                    var expr = BinaryExpressionParser.Parse(op, operandList[j], operandList[j + 1]);
+                    operationList.RemoveAt(j);
+                    operandList[j] = expr;
+                    operandList.RemoveAt(j+1);
+                    
+                }
+
+                if (op == '/')
+                {
+                    var expr = BinaryExpressionParser.Parse(op, operandList[j], operandList[j + 1]);
+                    operationList.RemoveAt(j);
+                    operandList[j] = expr;
+                    operandList.RemoveAt(j + 1);
+
+                }
+            }
+            for (var j = 0; j < operationList.Count; j++)
+            {
+                var op = operationList[j];
+                var expr = BinaryExpressionParser.Parse(op, operandList[j], operandList[j + 1]);
+                operationList.RemoveAt(j);
+                operandList[j] = expr;
+                operandList.RemoveAt(j + 1);
+            }
+            var totalResult = operandList.Single().Evaluate();
+
+
             return totalResult;
         }
 

@@ -15,5 +15,32 @@ namespace Calc.Core.Tests
             var result = calc.Calculate(expression, new ExpressionParser());
             Assert.AreEqual(6.0, result);
         }
+
+        [TestMethod]
+        public void SimpleSubtractionTest()
+        {
+            var calc = new Calculator();
+            var expression = "6-2-3";
+            var result = calc.Calculate(expression, new ExpressionParser());
+            Assert.AreEqual(1.0, result);
+        }
+
+        [TestMethod]
+        public void SimpleDivisionTest()
+        {
+            var calc = new Calculator();
+            var expression = "4 + 6/3";
+            var result = calc.Calculate(expression, new ExpressionParser());
+            Assert.AreEqual(6, result);
+        }
+
+        [TestMethod]
+        public void SimpleMultiplicationTest()
+        {
+            var calc = new Calculator();
+            var expression = "4 + 6*3";
+            var result = calc.Calculate(expression, new ExpressionParser());
+            Assert.AreEqual(22, result);
+        }
     }
 }
