@@ -17,7 +17,7 @@ namespace ConsoleDemo
             bool close = false;
             while (!close)
             {
-                Console.WriteLine("Type the expression: \n");
+                Console.WriteLine("Type the expression: ");
 
                 try
                 {
@@ -27,7 +27,7 @@ namespace ConsoleDemo
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.InnerException);
+                    Console.WriteLine(String.Format("Exception! {0}", e.Message));
                 }
                 
 

@@ -28,7 +28,7 @@ namespace Calc.Core.Expressions.Parsers
         {
             Type typeOfExpression;
             if (!OperatorsDictionary.TryGetValue(operationCh, out typeOfExpression))
-                throw new Exception(String.Format("Операция не найдена: \"{0}\"", operationCh));
+                throw new Exception(String.Format("Operator not found: \"{0}\"", operationCh));
             var bin = (IBinaryExpression)Activator.CreateInstance(typeOfExpression);
             return bin;
         }

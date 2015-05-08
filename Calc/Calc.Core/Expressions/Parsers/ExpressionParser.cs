@@ -19,7 +19,7 @@ namespace Calc.Core.Expressions.Parsers
             var operationList = new List<IBinaryExpression>();
             var nesting = 0;
             if (!AnalyzeBrackets(expression))
-                throw new Exception("Нарушен баланс скобок");
+                throw new Exception("Unbalanced brackets");
             var i = 0;
 
             while (i < expression.Length)
@@ -52,7 +52,7 @@ namespace Calc.Core.Expressions.Parsers
                     i++;
                     continue;
                 }
-                throw new Exception("Неопознаный оператор: " + expression[i]);
+                throw new Exception(String.Format("Operator not found: \"{0}\"", expression[i]));
 
             }
 
