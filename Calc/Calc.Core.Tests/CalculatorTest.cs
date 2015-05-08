@@ -29,18 +29,18 @@ namespace Calc.Core.Tests
         public void SimpleDivisionTest()
         {
             var calc = new Calculator();
-            var expression = "4 + 6/3";
+            var expression = "4 + 6/3 + 10";
             var result = calc.Calculate(expression, new ExpressionParser());
-            Assert.AreEqual(6, result);
+            Assert.AreEqual(16, result);
         }
 
         [TestMethod]
         public void SimpleMultiplicationTest()
         {
             var calc = new Calculator();
-            var expression = "4 + 6*3/1 + 10";
+            var expression = "4 + 6*3/1 - 10";
             var result = calc.Calculate(expression, new ExpressionParser());
-            Assert.AreEqual(32, result);
+            Assert.AreEqual(12, result);
         }
     }
 }

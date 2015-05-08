@@ -24,12 +24,12 @@ namespace Calc.Core.Expressions.Parsers
         {
             return OperatorsDictionary.ContainsKey(ch);
         }
-        public static IBinaryExpression Parse(char operationCh, IExpression left, IExpression right)
+        public static IBinaryExpression Parse(char operationCh)
         {
             Type typeOfExpression;
             if (!OperatorsDictionary.TryGetValue(operationCh, out typeOfExpression))
                 throw new Exception(String.Format("Операция не найдена: \"{0}\"", operationCh));
-            var bin = (IBinaryExpression)Activator.CreateInstance(typeOfExpression, left, right);
+            var bin = (IBinaryExpression)Activator.CreateInstance(typeOfExpression);
             return bin;
         }
     }

@@ -13,9 +13,11 @@ namespace Calc.Core.Expressions.Parsers
         public double ParseAndEvaluate(string expression)
         {
             expression = expression.Replace(" ", "");
+
+            var highestPriority = 2; //will be fix
             var operandList = new List<IExpression>();
-            var operationList = new List<Char>();
-            var resultsQueue = new Queue<IExpression>();
+            var operationList = new List<IBinaryExpression>();
+
             if (!AnalyzeBrackets(expression))
                 throw new Exception("Нарушен баланс скобок");
             var i = 0;
@@ -29,8 +31,9 @@ namespace Calc.Core.Expressions.Parsers
                 }
                 if (BinaryExpressionParser.ContainsOperation(expression[i]))
                 {
-                    var operCh = expression[i++];
-                    operationList.Add(operCh);
+                    var operCh = expression[i];
+                    operationList.Add(BinaryExpressionParser.Parse(operCh));
+                    i++;
                     continue;
                 }
                 if (expression[i] == '(')
@@ -47,40 +50,28 @@ namespace Calc.Core.Expressions.Parsers
 
             }
 
-            for (var k =0;k < operationList.Count;  k++)
+            while (highestPriority > 0)
             {
-                var op = operationList[k];
-                if (op == '*')
+                var k = 0;
+                while (k < operationList.Count)
                 {
-                    var expr = BinaryExpressionParser.Parse(op, operandList[k], operandList[k + 1]);
-                    operationList.RemoveAt(k);
-                    operandList[k] = expr;
-                    operandList.RemoveAt(k+1);
-                    
+                    if (operationList[k].Priority == highestPriority)
+                    {
+                        var binExp = operationList[k];
+                        binExp.LeftOperand = operandList[k];
+                        binExp.RightOperand = operandList[k + 1];
+                        operandList[k] = binExp;
+                        operationList.RemoveAt(k);
+                        operandList.RemoveAt(k + 1);
+                    }
+                    else k++;
                 }
-
-                if (op == '/')
-                {
-                    var expr = BinaryExpressionParser.Parse(op, operandList[k], operandList[k + 1]);
-                    operationList.RemoveAt(k);
-                    operandList[k] = expr;
-                    operandList.RemoveAt(k + 1);
-
-                }
+                highestPriority--;
             }
-            var j = 0;
-            while (operandList.Count != 1)
-            {
-                var op = operationList[j];
-                var expr = BinaryExpressionParser.Parse(op, operandList[j], operandList[j + 1]);
-                operationList.RemoveAt(j);
-                operandList[j] = expr;
-                operandList.RemoveAt(j + 1);
-            }
+
             var totalResult = operandList.Single().Evaluate();
-
-
             return totalResult;
+
         }
 
         public bool AnalyzeBrackets(string expression)

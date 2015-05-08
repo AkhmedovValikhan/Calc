@@ -15,5 +15,7 @@ namespace Calc.Core.Expressions
         {
             return Double.Parse(Number);
         }
+
+        public int Priority { get; set; }
     }
 }

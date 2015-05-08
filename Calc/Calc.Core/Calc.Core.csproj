@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculator.cs" />
+    <Compile Include="Expressions\DeafaultPriorities.cs" />
     <Compile Include="Expressions\Parsers\BinaryExpressionParser.cs" />
     <Compile Include="Expressions\BinaryExpressions\BinaryExpressionBase.cs" />
     <Compile Include="Expressions\BinaryExpressions\AdditionBinaryExpression.cs" />

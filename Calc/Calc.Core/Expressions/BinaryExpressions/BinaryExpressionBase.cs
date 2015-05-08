@@ -13,6 +13,12 @@ namespace Calc.Core.Expressions.BinaryExpressions
             RightOperand = right;
         }
 
+        protected BinaryExpressionBase()
+        {
+            
+        }
+
         public abstract double Evaluate();
+        public abstract int Priority { get; set; }
     }
 }
