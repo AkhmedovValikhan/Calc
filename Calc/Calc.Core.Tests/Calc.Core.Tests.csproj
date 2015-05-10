@@ -53,7 +53,6 @@
     <Compile Include="CalculatorTest.cs" />
     <Compile Include="ExpressionTests\BinaryExpressionsTests\BinaryExpressionTests.cs" />
     <Compile Include="ExpressionTests\ParsersTests\ExpressionParserTest.cs" />
-    <Compile Include="ExpressionTests\ParsersTests\BinaryExpressionParserTest.cs" />
     <Compile Include="ExpressionTests\NumericExpressionTest.cs" />
     <Compile Include="ExpressionTests\ExpressionFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
