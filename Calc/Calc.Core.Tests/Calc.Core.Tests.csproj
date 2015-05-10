@@ -55,6 +55,7 @@
     <Compile Include="ExpressionTests\ParsersTests\ExpressionParserTest.cs" />
     <Compile Include="ExpressionTests\ParsersTests\BinaryExpressionParserTest.cs" />
     <Compile Include="ExpressionTests\NumericExpressionTest.cs" />
+    <Compile Include="ExpressionTests\ExpressionFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
